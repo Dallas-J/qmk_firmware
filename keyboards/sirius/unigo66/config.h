@@ -21,6 +21,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MATRIX_ROWS 16
 #define MATRIX_COLS 16
 
+/* Reduce latency
+ * note: this keyboard is a frankenstein of two logitech keyboards,
+ * so debouncing is already performed upstream of the controller.
+ */
+#define USB_POLLING_INTERVAL_MS 1
+#define DEBOUNCE 0
+
 /*
  * Feature disable options
  *  These options are also useful to firmware size reduction.
