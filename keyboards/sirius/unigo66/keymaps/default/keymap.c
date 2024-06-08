@@ -5,16 +5,6 @@ enum custom_keycodes {
   GUILYR
 };
 
-const key_override_t rshift_key_override = ko_make_basic(MOD_BIT(KC_LSFT), KC_RSFT, KC_CAPS);
-const key_override_t lshift_key_override = ko_make_basic(MOD_BIT(KC_RSFT), KC_LSFT, KC_CAPS);
-
-// This globally defines all key overrides to be used
-const key_override_t **key_overrides = (const key_override_t *[]){
-	&rshift_key_override,
-  &lshift_key_override,
-	NULL // Null terminate the array of overrides!
-};
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // ┏━━━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┓            ┏━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━┳━━━━━━━┓
 // ┃  ESC  ┃  1  ┃  2  ┃  3  ┃  4  ┃  5  ┃ PLY1┃            ┃PLY2 ┃  6  ┃  7  ┃  8  ┃  9  ┃  0  ┃   -   ┃
@@ -108,6 +98,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       return false;
     default:
       timer_invalid = true;
+      unregister_code(KC_LALT);
   }
   return true;
 }

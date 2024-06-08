@@ -21,12 +21,20 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MATRIX_ROWS 16
 #define MATRIX_COLS 16
 
-/* Reduce latency
+/* 
+ * Reduce latency
  * note: this keyboard is a frankenstein of two logitech keyboards,
  * so debouncing is already performed upstream of the controller.
  */
 #define USB_POLLING_INTERVAL_MS 1
 #define DEBOUNCE 0
+
+/*
+ * Enable features
+*/
+#define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
+#define CAPS_WORD_INVERT_ON_SHIFT
+#define CAPS_WORD_IDLE_TIMEOUT 0 // timeout disabled
 
 /*
  * Feature disable options

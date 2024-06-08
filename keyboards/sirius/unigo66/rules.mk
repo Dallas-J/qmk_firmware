@@ -1,6 +1,6 @@
 # Extra features
 DYNAMIC_MACRO_ENABLE = yes
-KEY_OVERRIDE_ENABLE = yes
+CAPS_WORD_ENABLE = yes
 
 # Defaults
 CUSTOM_MATRIX = yes
