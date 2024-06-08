@@ -66,6 +66,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 bool is_alt_tab_active = false;
+bool timer_invalid = true;
 uint16_t bespoke_tap_timer = 0;
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -74,6 +75,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         // Records press time.
         bespoke_tap_timer = timer_read();
+        timer_invalid = false;
         // turn on layer 1
         layer_on(1);
       } else if (is_alt_tab_active) {
@@ -82,7 +84,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         // deactivate ALT+TAB
         unregister_code(KC_LALT);
         is_alt_tab_active = false;
-      } else if (timer_elapsed(bespoke_tap_timer) < TAPPING_TERM) {
+      } else if (!timer_invalid && timer_elapsed(bespoke_tap_timer) < TAPPING_TERM) {
         // turn off layer 1
         layer_off(1);
         // Sends out 'LGUI' if the key is held for less than tapping term
@@ -93,6 +95,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       } 
       return false;
     case ALTTAB: // ALT+TAB
+      timer_invalid = true;
       if (record->event.pressed) {
         if (!is_alt_tab_active) {
           is_alt_tab_active = true;
@@ -103,6 +106,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         unregister_code(KC_TAB);
       }
       return false;
+    default:
+      timer_invalid = true;
   }
   return true;
 }
